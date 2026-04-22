@@ -2,6 +2,8 @@
 
 A parametric OpenSCAD model for a vacuum nozzle adapter that transitions from a wide flat suction inlet to a round hose connector at a customizable angle.
 
+![Model in Visual Studio Code](image.png)
+
 ## Overview
 
 - **Inlet**: Wide, flat rectangular slot (faces downward toward the floor)
