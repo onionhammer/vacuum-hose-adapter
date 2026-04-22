@@ -1,0 +1,14 @@
+{
+  "parameterSets": {
+    "std": {
+      "angle_of_attack": "40",
+      "inlet_corner_radius": "27.752",
+      "hose_length": "25.93",
+      "hose_inner_diameter": "22.204",
+      "transition_length": "41.781",
+      "wall_thickness": "1.664",
+      "model_rotation": "90"
+    }
+  },
+  "fileFormatVersion": "1"
+}
