@@ -16,6 +16,7 @@ A parametric OpenSCAD model for a vacuum nozzle adapter that transitions from a 
 | Parameter | Default | Description |
 |---|---|---|
 | `hose_inner_diameter` | 35 mm | Inner diameter to accept your vacuum hose |
+| `connector_style` | 0 (male) | Whether the connector fits inside the hose (0) or outside (1) hose |
 | `wall_thickness` | 2 mm | Shell wall thickness |
 | `hose_length` | 50 mm | Length of the round hose tube |
 
