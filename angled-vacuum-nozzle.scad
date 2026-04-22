@@ -6,8 +6,13 @@
 //   • Hose connector extends upward and back at angle_of_attack from vertical
 
 /* [Hose Connector] */
-// Inner diameter to accept your vacuum hose (mm)
-hose_inner_diameter = 35;
+// Measured diameter of your vacuum hose (mm).
+// For male:   measure the hose's INNER diameter — the adapter tube slides INTO the hose.
+// For female: measure the hose's OUTER diameter — the hose slides INTO the adapter tube.
+hose_diameter = 35;
+// 0 = Male   (adapter inserts into hose, hose_diameter is the hose inner diameter)
+// 1 = Female (hose inserts into adapter, hose_diameter is the hose outer diameter)
+connector_style = 0; // [0:Male, 1:Female]
 // Shell wall thickness (mm)
 wall_thickness = 2;
 // Length of the round hose tube (mm)
@@ -37,7 +42,15 @@ model_rotation = 90; // [0:5:180]
 $fn = 64;
 
 // ── Derived ──────────────────────────────────────────────────────────────────
-hose_od = hose_inner_diameter + 2 * wall_thickness;
+// The mating surface differs by connector style:
+//   male:   adapter tube OD = hose_diameter  → adapter slides INTO the hose
+//           bore = hose_diameter - 2*wall (walls go inward)
+//   female: adapter tube ID = hose_diameter  → hose slides INTO the adapter
+//           outer = hose_diameter + 2*wall (walls go outward)
+hose_od = connector_style == 1
+    ? hose_diameter + 2 * wall_thickness
+    : hose_diameter;
+hose_inner_diameter = hose_od - 2 * wall_thickness;
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 // model_rotation rotates the sweep axis so the inlet faces the desired direction.
