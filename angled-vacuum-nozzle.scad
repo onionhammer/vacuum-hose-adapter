@@ -2,8 +2,8 @@
 // Wide flat suction inlet → round hose connector at a customizable angle.
 //
 // Orientation:
-//   • Inlet opening faces -Z (downward, toward the floor)
-//   • Hose connector extends upward and back at angle_of_attack from vertical
+//   • Default print orientation puts the hose connector at -Z (on the bed)
+//   • Inlet opening points upward by default
 
 /* [Hose Connector] */
 // Measured diameter of your vacuum hose (mm).
@@ -34,9 +34,10 @@ transition_length = 60;
 // Upward tilt of the hose connector from the inlet plane (degrees).
 // 0 = flat/horizontal, 45 = steep.
 angle_of_attack = 30; // [0:5:60]
-// Rotation of the whole model around X axis (degrees).
-// 90 = inlet faces down; 0 = inlet faces toward viewer.
-model_rotation = 90; // [0:5:180]
+// Which end sits on the print bed.
+// 0 = Hose connector on bed (recommended — usually no supports needed)
+// 1 = Inlet on bed
+print_orientation = 0; // [0:Hose on bed, 1:Inlet on bed]
 
 /* [Quality] */
 $fn = 64;
@@ -52,9 +53,26 @@ hose_od = connector_style == 1
     : hose_diameter;
 hose_inner_diameter = hose_od - 2 * wall_thickness;
 
+// ── Derived orientation ───────────────────────────────────────────────────────
+// Hose tube axis direction (before rotation): [0, cos(a), sin(a)]
+//   Hose on bed  → rotate X by (270 − a) to align tube axis with −Z
+//   Inlet on bed → rotate X by 90
+_orientation_angle =
+    print_orientation == 0 ? 270 - angle_of_attack : 90;
+
+// Hose tube tip position (before orientation rotation)
+_hose_tip_y = transition_length + hose_length * cos(angle_of_attack);
+_hose_tip_z = transition_length * tan(angle_of_attack)
+            + hose_length * sin(angle_of_attack);
+
+// Translate model up so the lowest point sits on the bed (Z = 0)
+_tip_z_rotated = _hose_tip_y * sin(_orientation_angle)
+               + _hose_tip_z * cos(_orientation_angle);
+_z_offset = -min(0, _tip_z_rotated);
+
 // ── Main ─────────────────────────────────────────────────────────────────────
-// model_rotation rotates the sweep axis so the inlet faces the desired direction.
-rotate([model_rotation, 0, 0])
+translate([0, 0, _z_offset])
+rotate([_orientation_angle, 0, 0])
 difference() {
     union() {
         transition_body(true);

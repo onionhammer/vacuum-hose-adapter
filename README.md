@@ -6,7 +6,7 @@ A parametric OpenSCAD model for a vacuum nozzle adapter that transitions from a 
 
 ## Overview
 
-- **Inlet**: Wide, flat rectangular slot (faces downward toward the floor)
+- **Inlet**: Wide, flat rectangular slot (faces upward in default print orientation)
 - **Outlet**: Round tube sized to accept your vacuum hose
 - **Transition**: Smooth rect-to-round hull sweep with configurable tilt angle
 
@@ -36,7 +36,7 @@ A parametric OpenSCAD model for a vacuum nozzle adapter that transitions from a 
 | Parameter | Default | Description |
 |---|---|---|
 | `angle_of_attack` | 30° | Upward tilt of the hose connector from the inlet plane (0 = flat, 45 = steep) |
-| `model_rotation` | 90° | Rotation around X axis (90 = inlet faces down) |
+| `print_orientation` | 0 (Hose on bed) | Which end sits on the print bed (0 = hose connector, 1 = inlet) |
 
 ### Quality
 | Parameter | Default | Description |
@@ -53,6 +53,6 @@ A preset parameter set is included in `angled-vacuum-nozzle.json` (`std`) tuned 
 
 ## Printing Tips
 
-- Print with the inlet face flat on the bed (use `model_rotation = 90`).
+- Print with the hose connector on the bed (default: `print_orientation = 0`). The model auto-rotates and sits flat on the build plate for any `angle_of_attack`.
 - Wall thickness of 2 mm or more is recommended for rigidity.
 - No supports should be needed for angles up to ~45°.

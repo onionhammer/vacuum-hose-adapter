@@ -8,7 +8,7 @@
       "inlet_corner_radius": "27.752",
       "transition_length": "41.781",
       "angle_of_attack": "40",
-      "model_rotation": "90",
+      "print_orientation": "1",
       "inlet_height": "8.5"
     }
   },
