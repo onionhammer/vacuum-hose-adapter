@@ -5,11 +5,11 @@
       "connector_style": "0",
       "wall_thickness": "1.664",
       "hose_length": "25.93",
+      "inlet_height": "8.5",
       "inlet_corner_radius": "27.752",
       "transition_length": "41.781",
       "angle_of_attack": "40",
-      "print_orientation": "1",
-      "inlet_height": "8.5"
+      "print_orientation": "0"
     }
   },
   "fileFormatVersion": "1"

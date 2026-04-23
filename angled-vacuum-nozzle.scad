@@ -57,8 +57,7 @@ hose_inner_diameter = hose_od - 2 * wall_thickness;
 // Hose tube axis direction (before rotation): [0, cos(a), sin(a)]
 //   Hose on bed  → rotate X by (270 − a) to align tube axis with −Z
 //   Inlet on bed → rotate X by 90
-_orientation_angle =
-    print_orientation == 0 ? 270 - angle_of_attack : 90;
+_orientation_angle = print_orientation == 0 ? 270 - angle_of_attack : 90;
 
 // Hose tube tip position (before orientation rotation)
 _hose_tip_y = transition_length + hose_length * cos(angle_of_attack);
